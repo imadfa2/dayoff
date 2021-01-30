@@ -5,7 +5,8 @@ var con = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
-  port : process.env.DB_PORT
+  port : process.env.DB_PORT,
+  database : process.env.DB_DB
   
 });
 //feedback
@@ -16,13 +17,5 @@ con.connect(function(err) {
   console.error('connencted!');
 });
 
-// con.query('create table test',(error, results, fields)=>{
-//   console.log(results)
-//   console.log(fields)
-//   console.error(error)
-//   })
-  // con.query('select * from tab',(error, results, fields)=>{
-  // console.log(results)
-  // console.log(fields)
-  // })
-// export default con;
+
+module.exports = con; 

@@ -1,15 +1,16 @@
-const User = require('../Models/User_model')
+const controller = {};
 
-exports.create = function(req, res) {
-    const new_employee = new Employee(req.body);
-    //handles null error
-    if(req.body.constructor === Object && Object.keys(req.body).length === 0){
-      res.status(400).send({ error:true, message: 'Please provide all required field' });
-    }else{
-    Employee.create(new_employee, function(err, employee) {
-      if (err)
-      res.send(err);
-      res.json({error:false,message:"Employee added successfully!",data:employee});
+controller.list = (req, res) => {
+  req.getConnection((err, conn) => {
+    conn.query('SELECT * FROM users', (err, users) => {
+     if (err) {
+      res.json(err);
+     }
+     res.send(users)
     });
-    }
-    };
+  });
+};
+
+
+
+module.exports = controller;

@@ -1,32 +1,31 @@
-const express = require('express');
 const bodyParser = require('body-parser');
+const express = require('express'),
+      mysql = require('mysql'),
+      myConnection = require('express-myconnection');
 
-
-// create express app
 const app = express();
 
+// importing routes
+const userroute = require('./Routes/routes');
 
+// settings
+app.set('port', process.env.PORT || 3000);
 
+// middlewares
+app.use(myConnection(mysql, {
+  host: '213.239.205.250',
+  user: 'root',
+  password: 'mPdzF8%0nxtN',
+  port: 3306,
+  database: 'dayoff'
+}))
+app.use(bodyParser.json());
+// routes
+app.use('/', userroute);
 
+// static files
 
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }))
-
-
-// parse requests of content-type - application/json
-app.use(bodyParser.json())
-
-
-// define a root route
-app.get('/', (req, res) => {
-  res.send("Hello World");
+// starting the server
+app.listen(app.get('port'), () => {
+  console.log(`server on port ${app.get('port')}`);
 });
-
-
-// Require employee routes
-const userRoutes = require('./Routes/Post')
-
-
-// using as middleware
-app.use('/api/v1/user', userRoutes)
-

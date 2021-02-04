@@ -18,6 +18,7 @@ controller.register = (req, res) => {
     if(!err) {
       res.send(`User ${req.body.firstname} ${req.body.lastname} has been added `),
       console.log (`User ${req.body.firstname} ${req.body.lastname} has been added` )
+
   }else{
     console.log(err),
     res.status(400).send('Error has occured');
@@ -29,7 +30,7 @@ controller.getById = (req, res) => {
   pool.query(`SELECT * FROM users WHERE id = ${req.params.id}`, (err, user) => {
     if (!err){
       res.send(user),
-      console.log("all users has been sent to endpoint getById")
+      console.log(`User with ID ${req.params.id} has been called`)
     }else{
       console.log(err)
     }

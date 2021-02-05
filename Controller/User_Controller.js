@@ -13,8 +13,7 @@ controller.list = (req, res) => {
   
 };
 controller.register = (req, res) => {
-  const data = req.body;
-  pool.query('INSERT INTO users set ?', data, (err) =>{
+  pool.query('INSERT INTO users set ?', req.body , (err) =>{
     if(!err) {
       res.send(`User ${req.body.firstname} ${req.body.lastname} has been added `),
       console.log (`User ${req.body.firstname} ${req.body.lastname} has been added` )

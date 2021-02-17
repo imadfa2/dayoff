@@ -13,7 +13,7 @@ module.exports = {
                 }
             })
         }else{
-            res.json("access denied")
+            res.json("مافي ولا حمار")
         }
     }
 }

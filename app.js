@@ -1,5 +1,9 @@
 const bodyParser = require('body-parser');
 const express = require('express');
+const session = require('express-session');
+const dotenv = require('dotenv');
+
+require("dotenv").config();
 
 const app = express();
 
@@ -10,7 +14,8 @@ const userroute = require('./Routes/routes');
 app.set('port', process.env.PORT || 8080);
 
 // middlewares
-app.use(bodyParser.json());
+
+app.use(express.json());
 // routes
 app.use('/', userroute);
 
@@ -20,3 +25,5 @@ app.use('/', userroute);
 app.listen(app.get('port'), () => {
   console.log(`server on port ${app.get('port')}`);
 });
+
+

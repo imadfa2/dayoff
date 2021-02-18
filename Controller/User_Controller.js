@@ -1,6 +1,7 @@
 const pool = require('../Database_connection');
 const jwt = require('jsonwebtoken');
 const dotenv =require('dotenv');
+const { token } = require('../Config/Token_Create')
 const controller = {};
 
 
@@ -76,9 +77,9 @@ controller.login = (req,res) =>  {
 // check if user exists
       pool.query('SELECT * FROM users WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
           if (results.length > 0) {
-            let token = jwt.sign(username, 'vX7xQr*45h&J');
-
+            
             res.json(token)
+
           } else {
             res.send('Incorrect Username and/or Password!');
           }           

@@ -8,7 +8,7 @@ require("dotenv").config();
 const app = express();
 
 // importing routes
-const userroute = require('./Routes/routes');
+const userroute = require('./Routes/User_Routes');
 
 // settings
 app.set('port', process.env.PORT || 8080);
@@ -17,7 +17,7 @@ app.set('port', process.env.PORT || 8080);
 
 app.use(express.json());
 // routes
-app.use('/', userroute);
+app.use('/user/', userroute);
 
 // static files
 
